@@ -1,4 +1,42 @@
-kube-updater
-updater
-kube-checker
-checker
+# Binaries
+/kube-pod-update
+*.exe
+*.out
+*.o
+*.a
+*.so
+
+# Build & cache
+/build/
+bin/
+dist/
+coverage.out
+
+# Go modules cache (no need to ignore go.mod/go.sum)
+*.test
+
+# VSCode settings
+.vscode/
+
+# Logs
+*.log
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Dev Containers
+.devcontainer/*.env
+.devcontainer/.envrc
+.devcontainer/docker-compose.override.yml
+
+# Git specific
+.git/
+
+# Kubernetes configs
+*.kubeconfig
+*.yaml.backup
+
+# Helm artifacts
+charts/
+helm-chart.tgz
