@@ -11,8 +11,17 @@ var (
 	yellow = color.New(color.FgYellow).SprintFunc()
 	red    = color.New(color.FgRed).SprintFunc()
 	green  = color.New(color.FgGreen).SprintFunc()
-	// cyan   = color.New(color.FgCyan).SprintFunc()
+	cyan   = color.New(color.FgCyan).SprintFunc()
 )
+
+func LogDebug(pod v1.Pod, currentImage, latestDigest string) {
+	fmt.Printf("%s %s/%s: %s → %s\n",
+		cyan("[DEBUG]"),
+		pod.Namespace, pod.Name,
+		currentImage,
+		latestDigest,
+	)
+}
 
 func LogOutdatedImage(pod v1.Pod, currentImage, latestDigest string) {
 	fmt.Printf("%s %s/%s: %s → %s\n",

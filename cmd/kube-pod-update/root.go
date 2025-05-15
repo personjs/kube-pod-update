@@ -11,10 +11,11 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var verbose bool
 var update bool
 
 var rootCmd = &cobra.Command{
-	Use:   "kube-checker",
+	Use:   "kube-pod-update",
 	Short: "Detect and optionally update outdated images in running pods",
 	Run: func(cmd *cobra.Command, args []string) {
 		client := k8s.NewClient()
@@ -26,6 +27,9 @@ var rootCmd = &cobra.Command{
 				if err != nil {
 					notifier.LogRegistryError(pod, container.Image, err)
 					continue
+				}
+				if verbose {
+					notifier.LogDebug(pod, container.Image, remoteDigest)
 				}
 				if compare.IsOutdated(container.Image, remoteDigest) {
 					if update {
@@ -52,5 +56,6 @@ func Execute() {
 }
 
 func init() {
+	rootCmd.Flags().BoolVarP(&verbose, "verbose", "v", false, "Run with verbose logging")
 	rootCmd.Flags().BoolVarP(&update, "update", "u", false, "Update deployments with outdated images")
 }

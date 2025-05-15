@@ -26,6 +26,9 @@
 
 ```bash
 go build ./cmd/kube-pod-update
+
+# Raspberry Pi
+GOOS=linux GOARCH=arm64 go build ./cmd/kube-pod-update
 ```
 
 ---
